@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter Online — Fast Global Exchange Rates</title>
+    <meta name="description" content="Free and easy online currency converter. Convert instantly between USD, EUR, GBP, JPY, CAD, AUD, CHF, and PLN with global exchange rates.">
+    
+    <!-- MONETIZATION ADSTERRA DIRECT LINK -->
+    <script>
+        document.addEventListener('click', function() {
+            if (!window.adOpened) {
+                window.open('https://effectivecpmnetwork.com', '_blank');
+                window.adOpened = true;
+            }
+        });
+    </script>
+
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); max-width: 440px; width: 100%; }
+        h1 { font-size: 24px; text-align: center; color: #2c3e50; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; color: #555; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 12px; background: #e74c3c; border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
+        button:hover { background: #c0392b; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; text-align: center; font-size: 18px; font-weight: bold; background-color: #fdf2f2; color: #c0392b; border: 1px solid #f5c6cb; }
+        .faq { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; font-size: 14px; color: #666; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Global Currency Converter</h1>
+    
+    <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" placeholder="e.g. 100" value="100" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="fromCurrency">From:</label>
+        <select id="fromCurrency">
+            <option value="USD">USD (US Dollar)</option>
+            <option value="EUR">EUR (Euro)</option>
+            <option value="GBP">GBP (British Pound)</option>
+            <option value="JPY">JPY (Japanese Yen)</option>
+            <option value="CAD">CAD (Canadian Dollar)</option>
+            <option value="AUD">AUD (Australian Dollar)</option>
+            <option value="CHF">CHF (Swiss Franc)</option>
+            <option value="PLN">PLN (Polish Zloty)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="toCurrency">To:</label>
+        <select id="toCurrency">
+            <option value="EUR" selected>EUR (Euro)</option>
+            <option value="USD">USD (US Dollar)</option>
+            <option value="GBP">GBP (British Pound)</option>
+            <option value="JPY">JPY (Japanese Yen)</option>
+            <option value="CAD">CAD (Canadian Dollar)</option>
+            <option value="AUD">AUD (Australian Dollar)</option>
+            <option value="CHF">CHF (Swiss Franc)</option>
+            <option value="PLN">PLN (Polish Zloty)</option>
+        </select>
+    </div>
+    
+    <button onclick="convertCurrency()">Convert Now</button>
+    
+    <div id="resultBox" class="result"></div>
+
+    <div class="faq">
+        <h3>How does this currency tool work?</h3>
+        <p>Select the fiat currency you want to exchange, type in the amount, and choose your target currency. Our secure script immediately calculates the final value based on fixed cross-rates. It is fast, private, and requires zero sign-ups.</p>
+    </div>
+</div>
+
+<script>
+function convertCurrency() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const from = document.getElementById('fromCurrency').value;
+    const to = document.getElementById('toCurrency').value;
+    const resultBox = document.getElementById('resultBox');
+
+    if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid amount greater than 0!');
+        return;
+    }
+
+    // Fixed rates based on USD metrics for reliable standalone browser processing
+    const rates = {
+        "USD": 1,
+        "EUR": 0.92,
+        "GBP": 0.78,
+        "JPY": 156.50,
+        "CAD": 1.37,
+        "AUD": 1.51,
+        "CHF": 0.90,
+        "PLN": 4.02
+    };
+
+    if (from === to) {
+        resultBox.style.display = 'block';
+        resultBox.innerHTML = `${amount.toFixed(2)} ${to}`;
+        return;
+    }
+
+    const amountInUSD = amount / rates[from];
+    const finalAmount = amountInUSD * rates[to];
+
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = `${amount.toFixed(2)} ${from} = ${finalAmount.toFixed(2)} ${to}`;
+}
+</script>
+
+</body>
+</html>
